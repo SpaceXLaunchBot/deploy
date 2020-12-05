@@ -17,10 +17,13 @@ docker run -d --name postgres --restart unless-stopped \
     --network slbnetwork \
     postgres
 
-docker run -d --name spacexlaunchbot \
+docker run -d --name spacexlaunchbot --restart unless-stopped \
     -v slbdata:/docker-volume \
     --network slbnetwork \
     --env-file $(pwd)/config.env \
     psidex/spacexlaunchbot
 
-# TODO: Run website server
+docker run -d --name spacexlaunchbot-webserver --restart unless-stopped \
+    --network slbnetwork \
+    --env-file $(pwd)/config.env \
+    psidex/spacexlaunchbot-webserver

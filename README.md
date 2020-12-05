@@ -15,4 +15,8 @@ chmod +x deploy
 ./deploy
 ```
 
-Don't delete the cloned directory if you want to be able to update the containers easily.
+Don't delete the cloned directory if you want to be able to update the containers
+easily.
+
+Once it's running, `spacexlaunchbot-webserver` serves on port `8080` if you want to
+add it to another network for something like reverse proxying to it.

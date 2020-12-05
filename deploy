@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [ ! -f ./config.env ]; then
+    echo ".env not found"
+    exit
+fi
+
+docker network create slbnetwork
+
+docker volume create postgresdata
+docker volume create slbdata
+
+docker run -d --name postgres --restart unless-stopped \
+    --env-file $(pwd)/config.env \
+    -v $(pwd)/pg-create.sh:/docker-entrypoint-initdb.d/pg-create.sh \
+    -v postgresdata:/var/lib/postgresql/data \
+    --network slbnetwork \
+    postgres
+
+docker run -d --name spacexlaunchbot \
+    -v slbdata:/docker-volume \
+    --network slbnetwork \
+    --env-file $(pwd)/config.env \
+    psidex/spacexlaunchbot
+
+# TODO: Run website server

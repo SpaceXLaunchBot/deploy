@@ -9,3 +9,10 @@ CREATE TABLE subscribed_channels (
     notification_type notification not null,
     launch_mentions text
 );
+
+CREATE TABLE metrics (
+    id serial primary key not null,
+    "action" text not null,
+    guild_id text not null,
+    "time" timestamp not null
+);

@@ -17,4 +17,10 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         guild_id text not null,
         "time" timestamp not null
     );
+    CREATE TABLE counts (
+        id serial primary key not null,
+        guild_count int not null,
+        subscribed_count int not null,
+        "time" timestamp not null
+    );
 EOSQL

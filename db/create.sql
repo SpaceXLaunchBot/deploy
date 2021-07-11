@@ -1,28 +1,31 @@
+-- This is just to make writing the SQL easier, the actual SQL that is executed is
+-- located in ../pg-create.sh and should be updated when this is.
+
 -- CREATE DATABASE spacexlaunchbot
 -- \c spacexlaunchbot
 
 -- Subscribed channel data.
 CREATE TYPE notification AS ENUM ('all', 'schedule', 'launch');
 CREATE TABLE subscribed_channels (
-    channel_id text primary key not null,
-    guild_id text not null,
-    channel_name text not null,
-    notification_type notification not null,
-    launch_mentions text
+    channel_id TEXT PRIMARY KEY NOT NULL,
+    guild_id TEXT NOT NULL,
+    channel_name TEXT NOT NULL,
+    notification_type notification NOT NULL,
+    launch_mentions TEXT
 );
 
 -- Basic metrics - an action and what guild it happened in.
 CREATE TABLE metrics (
-    id serial primary key not null,
-    "action" text not null,
-    guild_id text not null,
-    "time" timestamp not null
+    id serial PRIMARY KEY NOT NULL,
+    "action" TEXT NOT NULL,
+    guild_id TEXT NOT NULL,
+    "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- Track guild and subscribed channel count over time.
 CREATE TABLE counts (
-    id serial primary key not null,
-    guild_count int not null,
-    subscribed_count int not null,
-    "time" timestamp not null
+    id serial PRIMARY KEY NOT NULL,
+    guild_count INT NOT NULL,
+    subscribed_count INT NOT NULL,
+    "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

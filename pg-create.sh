@@ -23,4 +23,11 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         subscribed_count INT NOT NULL,
         "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
     );
+    CREATE TABLE sessions (
+        session_id TEXT PRIMARY KEY NOT NULL,
+        access_token_encrypted BYTEA NOT NULL,
+        access_token_expires_at TIMESTAMP NOT NULL,
+        refresh_token_encrypted BYTEA NOT NULL,
+        refresh_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );
 EOSQL

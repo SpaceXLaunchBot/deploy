@@ -29,3 +29,12 @@ CREATE TABLE counts (
     subscribed_count INT NOT NULL,
     "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+
+-- Hold sessions with users so we can store their Discord OAuth secrets.
+CREATE TABLE sessions (
+    session_id TEXT PRIMARY KEY NOT NULL,
+    access_token_encrypted BYTEA NOT NULL,
+    access_token_expires_at TIMESTAMP NOT NULL,
+    refresh_token_encrypted BYTEA NOT NULL,
+    refresh_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);

@@ -27,3 +27,6 @@ docker run -d --name spacexlaunchbot-webserver --restart unless-stopped \
     --network slbnetwork \
     --env-file $(pwd)/config.env \
     psidex/spacexlaunchbot-webserver
+
+# To connect to another network, proxynet for example:
+# docker network connect proxynet spacexlaunchbot-webserver

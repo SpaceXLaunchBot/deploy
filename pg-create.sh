@@ -31,4 +31,12 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         refresh_token_encrypted BYTEA NOT NULL,
         refresh_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
     );
+    CREATE TABLE log (
+        id serial PRIMARY KEY NOT NULL,
+        time TEXT,
+        level TEXT,
+        location TEXT,
+        function TEXT,
+        message TEXT
+    );
 EOSQL

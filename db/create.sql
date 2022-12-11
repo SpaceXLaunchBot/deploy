@@ -39,3 +39,13 @@ CREATE TABLE sessions (
     refresh_token_encrypted BYTEA NOT NULL,
     refresh_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+
+-- Very basic log persistence.
+CREATE TABLE log (
+    id serial PRIMARY KEY NOT NULL,
+    time TEXT,
+    level TEXT,
+    location TEXT,
+    function TEXT,
+    message TEXT
+);

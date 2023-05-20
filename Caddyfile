@@ -3,7 +3,11 @@
 }
 
 stats.spacexlaunchbot.dev {
-  header X-Clacks-Overhead "GNU Terry Pratchett"
+  header {
+    X-Clacks-Overhead "GNU Terry Pratchett"
+    Access-Control-Allow-Origin *
+    Access-Control-Allow-Methods GET
+  }
   log {
     output file /var/log/caddy/stats.spacexlaunchbot.dev.access.log
   }

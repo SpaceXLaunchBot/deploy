@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -ex
+
+if [ ! -f ./config.env ]; then
+  echo "config.env not found"
+  exit
+fi
+
+docker compose -p "slb" up -d
+
+# TODO: Make sure everything has db hostname changed to "postgres", it should all be using DB_HOST env anyway

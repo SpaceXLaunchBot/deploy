@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -ex
+
+if [ ! -f ./config.env ]; then
+  echo "config.env not found"
+  exit
+fi
+
+docker compose -p "slb" down

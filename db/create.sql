@@ -1,5 +1,5 @@
 -- This is just to make writing the SQL easier, the actual SQL that is executed is
--- located in ../pg-create.sh and should be updated when this is.
+-- located in ../pg-create and should be updated when this is.
 
 -- CREATE DATABASE spacexlaunchbot
 -- \c spacexlaunchbot
@@ -28,16 +28,6 @@ CREATE TABLE counts (
     guild_count INT NOT NULL,
     subscribed_count INT NOT NULL,
     "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
--- Hold sessions with users so we can store their Discord OAuth secrets.
-CREATE TABLE sessions (
-    session_id TEXT PRIMARY KEY NOT NULL,
-    session_creation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    access_token_encrypted BYTEA NOT NULL,
-    access_token_expires_at TIMESTAMP NOT NULL,
-    refresh_token_encrypted BYTEA NOT NULL,
-    refresh_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- Very basic log persistence.

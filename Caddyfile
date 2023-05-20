@@ -1,0 +1,11 @@
+{
+  email simjenner3@gmail.com
+}
+
+stats.spacexlaunchbot.dev {
+  header X-Clacks-Overhead "GNU Terry Pratchett"
+  log {
+    output file /var/log/caddy/stats.spacexlaunchbot.dev.access.log
+  }
+  reverse_proxy stats-server:8080
+}

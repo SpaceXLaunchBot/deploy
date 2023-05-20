@@ -1,0 +1,68 @@
+services:
+
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    networks:
+      - slbnetwork
+    env_file:
+      - ./config.env
+    volumes:
+      - ./scripts/pg-create:/docker-entrypoint-initdb.d/pg-create.sh
+      - postgresdata:/var/lib/postgresql/data
+    labels:
+      - com.centurylinklabs.watchtower.enable: false
+
+  spacexlaunchbot:
+    image: psidex/spacexlaunchbot:latest
+    restart: unless-stopped
+    networks:
+      - slbnetwork
+    env_file:
+      - ./config.env
+    volumes:
+      - slbdata:/docker-volume
+    depends_on:
+      - postgres
+
+  stats-server:
+    image: psidex/spacexlaunchbot-stats-server:latest
+    restart: unless-stopped
+    networks:
+      - slbnetwork
+      - proxynet
+    env_file:
+      - ./config.env
+    depends_on:
+      - postgres
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    networks:
+      - proxynet
+    volumes:
+      - caddy:/data
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - stats-server
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+
+networks:
+  slbnetwork:
+  proxynet:
+
+
+volumes:
+  slbdata:
+  postgresdata:
+  caddy:

@@ -5,9 +5,7 @@
 stats.spacexlaunchbot.dev {
   header {
     X-Clacks-Overhead "GNU Terry Pratchett"
-    Access-Control-Allow-Origin *
-    Access-Control-Allow-Methods GET
-    Cache-Control max-age=600 # 10 minutes
+    Cache-Control max-age=300 # 5 minutes
   }
   log {
     output file /var/log/caddy/stats.spacexlaunchbot.dev.access.log

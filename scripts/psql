@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -ex
+
+if [ ! -f ./config.env ]; then
+  echo "config.env not found"
+  exit
+fi
+source config.env
+
+docker exec -it slb-$SLB_DB_HOST psql -U $POSTGRES_USER --dbname=$POSTGRES_DB

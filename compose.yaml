@@ -56,6 +56,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/.docker/config.json:/config.json
+    environment:
+      # Not required anymore but good to have the fastest polling possible.
+      # https://github.com/containrrr/watchtower/issues/669#issuecomment-721885754
+      # 6 (5 containers + 1 for padding) * 216 = 1296 second interval
+      - WATCHTOWER_POLL_INTERVAL=1296
 
 networks:
   slbnetwork:

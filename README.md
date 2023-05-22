@@ -21,5 +21,5 @@ git clone https://github.com/SpaceXLaunchBot/deploy.git
 cd deploy
 vi config.env
 chmod +x scripts/*
-./scripts/deploy
+./scripts/up
 ```

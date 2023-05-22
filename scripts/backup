@@ -11,4 +11,5 @@ source config.env
 
 docker exec -t slb-$SLB_DB_HOST-1 pg_dump \
   -U $POSTGRES_USER --dbname=$POSTGRES_DB \
+  --column-inserts --data-only \
   >"dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"

@@ -10,4 +10,4 @@ source config.env
 
 # https://stackoverflow.com/a/29913462/6396652
 
-cat "$*" | docker exec -i slb-$SLB_DB_HOST psql -U $POSTGRES_USER
+cat "$*" | docker exec -i slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER

@@ -7,4 +7,4 @@ if [ ! -f ./config.env ]; then
 fi
 source config.env
 
-docker exec -it slb-$SLB_DB_HOST psql -U $POSTGRES_USER --dbname=$POSTGRES_DB
+docker exec -it slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER --dbname=$POSTGRES_DB

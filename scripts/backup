@@ -9,6 +9,6 @@ source config.env
 
 # https://stackoverflow.com/a/29913462/6396652
 
-docker exec -t slb-$SLB_DB_HOST pg_dump \
+docker exec -t slb-$SLB_DB_HOST-1 pg_dump \
   -U $POSTGRES_USER --dbname=$POSTGRES_DB \
   >"dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"

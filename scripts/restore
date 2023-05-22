@@ -10,4 +10,5 @@ source config.env
 
 # https://stackoverflow.com/a/29913462/6396652
 
-cat "$*" | docker exec -i slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER
+# FIXME: In testing this prints some errors and doesn't populate the log table, but inserts all the important data.
+cat "$*" | docker exec -i slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER --dbname=$POSTGRES_DB

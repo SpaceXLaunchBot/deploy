@@ -1,13 +1,15 @@
-#!/usr/bin/env bash
-# ./scripts/restore ~/backups/backup.sql
+#!/bin/bash
 set -ex
+
+#
+# Restore the SLB database from a dump
+# https://stackoverflow.com/a/29913462/6396652
+#
 
 if [ ! -f ./config.env ]; then
   echo "config.env not found"
   exit
 fi
 source config.env
-
-# https://stackoverflow.com/a/29913462/6396652
 
 cat "$*" | docker exec -i slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER --dbname=$POSTGRES_DB

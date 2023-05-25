@@ -1,0 +1,15 @@
+#!/bin/bash
+set -ex
+
+script="$(pwd)/scripts/backup c"
+
+tmp=$(mktemp)
+
+crontab -l >"$tmp"
+
+# At 00:00 on Sunday
+echo "0 0 * * 0 $script" >>"$tmp"
+
+crontab "$tmp"
+
+rm "$tmp"

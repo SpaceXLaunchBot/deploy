@@ -1,5 +1,5 @@
 -- This is just to make writing the SQL easier, the actual SQL that is executed is
--- located in ../scripts/pg-create and should be updated when this is.
+-- located in pg-create and should be updated when this is.
 
 -- CREATE DATABASE spacexlaunchbot
 -- \c spacexlaunchbot

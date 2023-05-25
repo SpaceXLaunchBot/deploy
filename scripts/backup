@@ -1,5 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -ex
+
+#
+# Dump the SLB database to ./dumps
+# Provide "c" arg (e.g. bash ./backup c) to compress after dump
+# pg_dump: https://stackoverflow.com/a/29913462/6396652
+#
 
 if [ ! -f ./config.env ]; then
   echo "config.env not found"
@@ -7,9 +13,17 @@ if [ ! -f ./config.env ]; then
 fi
 source config.env
 
-# https://stackoverflow.com/a/29913462/6396652
+mkdir -p "./dumps"
+
+DUMP_FILE="./dumps/dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"
+DUMP_FILE_TGZ="$DUMP_FILE.tar.gz"
 
 docker exec -t slb-$SLB_DB_HOST-1 pg_dump \
   -U $POSTGRES_USER --dbname=$POSTGRES_DB \
   --column-inserts --data-only \
-  >"dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"
+  >"$DUMP_FILE"
+
+if [ "$1" == "c" ]; then
+  tar -cvzf "$DUMP_FILE_TGZ" "$DUMP_FILE"
+  rm "$DUMP_FILE"
+fi

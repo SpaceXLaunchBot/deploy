@@ -1,11 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -e
 
 #####################################################
 # !!! FOR EXECUTION INSIDE A POSTGRES CONTAINER !!! #
 #####################################################
 
-# SQL is from db directory.
+# SQL is from ./create.sql
+
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE TYPE notification AS ENUM ('all', 'schedule', 'launch');
     CREATE TABLE subscribed_channels (

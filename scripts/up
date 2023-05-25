@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -ex
 
 if [ ! -f ./config.env ]; then
@@ -7,5 +7,3 @@ if [ ! -f ./config.env ]; then
 fi
 
 docker compose -p "slb" up -d
-
-# TODO: Make sure everything has db hostname changed to "postgres", it should all be using DB_HOST env anyway

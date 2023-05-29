@@ -6,8 +6,8 @@ set -ex
 # https://stackoverflow.com/a/29913462/6396652
 #
 # Strategy:
-# 1.Start from a clone on a new server OR
-#   $ ./scripts/down && docker volume delete slb_postgresdata
+# 1. Start from a clone on a new server OR
+#    $ ./scripts/down && docker volume delete slb_postgresdata
 # 2. $ mkdir -p "./dumps"
 # 3. Place your dump*.sql.tar.gz file in ./dumps
 # 4. $ tar -xvzf ./dumps/dump_dd-mm-yyyy_hh_mm_ss.sql.tar.gz -C ./dumps

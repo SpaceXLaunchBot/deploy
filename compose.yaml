@@ -55,7 +55,6 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json
     environment:
       # Not required anymore but good to have the fastest polling possible.
       # https://github.com/containrrr/watchtower/issues/669#issuecomment-721885754

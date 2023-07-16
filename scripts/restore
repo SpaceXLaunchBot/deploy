@@ -1,5 +1,4 @@
 #!/bin/bash
-set -ex
 
 #
 # Restore the SLB database from a dump
@@ -16,10 +15,8 @@ set -ex
 # 7. $ rm ./dumps/dump_dd-mm-yyyy_hh_mm_ss.sql
 #
 
-if [ ! -f ./config.env ]; then
-  echo "config.env not found"
-  exit
-fi
+set -e
 source config.env
+set -x
 
 cat "$*" | docker exec -i slb-$SLB_DB_HOST-1 psql -U $POSTGRES_USER --dbname=$POSTGRES_DB

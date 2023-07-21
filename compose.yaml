@@ -30,7 +30,6 @@ services:
     restart: unless-stopped
     networks:
       - slbnetwork
-      - proxynet
     env_file:
       - ./config.env
     ports:

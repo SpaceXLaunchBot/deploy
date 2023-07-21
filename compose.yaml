@@ -33,40 +33,15 @@ services:
       - proxynet
     env_file:
       - ./config.env
+    ports:
+      - 127.0.0.1:8080:8080
     depends_on:
       - postgres
 
-  caddy:
-    image: caddy:latest
-    restart: unless-stopped
-    networks:
-      - proxynet
-    volumes:
-      - caddy:/data
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    ports:
-      - 80:80
-      - 443:443
-    depends_on:
-      - stats-server
-
-  watchtower:
-    image: containrrr/watchtower:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      # Not required anymore but good to have the fastest polling possible.
-      # https://github.com/containrrr/watchtower/issues/669#issuecomment-721885754
-      # 6 (5 containers + 1 for padding) * 216 = 1296 second interval
-      - WATCHTOWER_POLL_INTERVAL=1296
-
 networks:
   slbnetwork:
-  proxynet:
 
 
 volumes:
   slbdata:
   postgresdata:
-  caddy:

@@ -16,6 +16,8 @@ cd ~/deploy
 
 ## Deployment
 
+The Docker compose file binds the stats server to `127.0.0.1:8080` on the host.
+
 ```bash
 git clone https://github.com/SpaceXLaunchBot/deploy.git
 cd deploy

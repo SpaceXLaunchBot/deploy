@@ -10,10 +10,12 @@ set -e
 source config.env
 set -x
 
-mkdir -p "./dumps"
-
-DUMP_FILE="./dumps/$(date +"%Y%m%d_%H%M%S").sql"
+DUMP_DIR="./dumps"
+DUMP_FILE="$(date +"%Y%m%d_%H%M%S").sql"
 DUMP_FILE_TGZ="$DUMP_FILE.tar.gz"
+
+mkdir -p "$DUMP_DIR"
+pushd "$DUMP_DIR"
 
 docker exec -t slb-$SLB_DB_HOST-1 pg_dump \
   -U $POSTGRES_USER --dbname=$POSTGRES_DB \
@@ -24,3 +26,5 @@ if [ "$1" == "c" ]; then
   tar -cvzf "$DUMP_FILE_TGZ" "$DUMP_FILE"
   rm "$DUMP_FILE"
 fi
+
+popd
